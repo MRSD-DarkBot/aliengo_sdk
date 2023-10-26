@@ -7,7 +7,11 @@ link_directories(lib)
 
 add_compile_options(-std=c++11)
 
+if (CMAKE_SYSTEM_PROCESSOR MATCHES "(x86)|(X86)|(amd64)|(AMD64)")
 set(EXTRA_LIBS -pthread libaliengo_comm.so lcm)
+else ()
+    set(EXTRA_LIBS -pthread libaliengo_comm_arm64.so lcm)
+endif ()
 
 # one pc one process
 add_executable(position_example examples/position_example.cpp)
